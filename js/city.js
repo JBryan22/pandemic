@@ -7,6 +7,7 @@ export class City {
     this.infections = 0;
     this.quarantine = false;
     this.maxed = false;
+    this.outbroken = false;
   }
 
   addInfection() {
@@ -24,13 +25,10 @@ export class City {
     if (this.infections > 0) {
       this.infections--;
     }
+    this.outbroken = false;
   }
 
   quarantineCity() {
     this.quarantine = true;
   }
-
-  // outbreak() {
-  //
-  // }
 }

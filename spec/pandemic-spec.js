@@ -27,6 +27,12 @@ describe('City', function() {
     expect(city.infections).toEqual(0);
   });
 
+  it('should change outbroken to false from true when used', function() {
+    city.outbroken = true;
+    city.removeInfection();
+    expect(city.outbroken).toEqual(false);
+  });
+
   it('should set maxed equal to true if infections are greater than 4', function() {
     city.infections = 4;
     city.addInfection();
@@ -65,5 +71,37 @@ describe('Pandemic', function() {
     pandemic.infectRandomCities(4);
     let result = pandemic.getTotalInfections();
     expect(result).toEqual(4);
+  });
+
+  it('should cause outbreak when a city is maxed above 4 infections', function() {
+    //Infect Seattle, which is pandemic[0], and cause outbreak in Tacoma, Bellingham, Bellevue, Everett, and Bremerton.
+    pandemic.cities[0].infections = 5;
+    pandemic.cities[0].maxed = true;
+    if (pandemic.cities[0].addInfection()) {
+      pandemic.outbreak(pandemic.cities[0]);
+    };
+    expect(pandemic.getTotalInfections()).toEqual(10);
+  });
+
+  it('should cause a city to be outbroken if it gets an outbreak', function() {
+    //Infect Seattle, which is pandemic[0], and cause outbreak in Tacoma, Bellingham, Bellevue, Everett, and Bremerton.
+    pandemic.cities[0].infections = 5;
+    pandemic.cities[0].maxed = true;
+    if (pandemic.cities[0].addInfection()) {
+      pandemic.outbreak(pandemic.cities[0]);
+    };
+    expect(pandemic.cities[0].outbroken).toEqual(true);
+  });
+
+  it('should cause multiple outbreaks when a city is maxed above 4 infections and it outbreaks to another maxed city', function() {
+    //Infect Seattle, which is pandemic[0], and cause outbreak in Tacoma, Bellingham, Bellevue, Everett, and Bremerton.
+    pandemic.cities[0].infections = 5;
+    pandemic.cities[0].maxed = true;
+    pandemic.cities[13].infections = 5;
+    pandemic.cities[13].maxed = true;
+    if (pandemic.cities[0].addInfection()) {
+      pandemic.outbreak(pandemic.cities[0]);
+    };
+    expect(pandemic.getTotalInfections()).toEqual(16);
   });
 });
