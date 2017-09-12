@@ -8,6 +8,8 @@ $(function() {
     $(".pandemic-board").show();
     newPandemic.createCities();
     newPandemic.createQuestions();
+    newPandemic.infectRandomCities();
+
     const infectionInterval = setInterval(() => {
       newPandemic.infectRandomCities();
       // $('.outer').append("<div class='infection-blocks'></div>")
@@ -19,15 +21,22 @@ $(function() {
       newPandemic.infectionAmount += 2;
     }, 60000);
 
-    setInterval(function() {
+    const game = setInterval(function() {
       //Loop through cities & append .infection-blocks div
       newPandemic.cities.forEach(function(city) {
         $(`.${city.name} .outer`).text("");
         for(let i = 0; i < city.infections; i++) {
           $(`.${city.name} .outer`).append("<div class='infection-blocks'></div>")
         }
-      }, 250);
-    });
+      });
+      if (newPandemic.getTotalInfections() > 45) {
+        clearInterval(game);
+        alert("YOU LOSE");
+      } else if (newPandemic.getTotalInfections() == 0) {
+        clearInterval(game);
+        alert("YOU Win");
+      }
+    }, 250);
   });
 
   //add infections

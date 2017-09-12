@@ -53,13 +53,11 @@ export class Pandemic {
   }
 
   outbreak(city) {
-    console.log("Outbreak!!!!!");
     city.outbroken = true;
     city.connections.forEach((connectionCity) => {
       let currentCityIndex = this.cities.findIndex(i => i.name == connectionCity);
       this.cities[currentCityIndex].addInfection()
     });
-    console.log("End OutBReak!!");
   }
 
   buildQuarantinePoints() {
