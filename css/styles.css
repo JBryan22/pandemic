@@ -1,0 +1,27 @@
+.pandemic-board {
+  display:none;
+}
+
+.city {
+  display: inline-block;
+  width:18%;
+  height:200px;
+  border: 1px solid black;
+  margin:5px;
+  text-align: center;
+  padding:5px;
+  vertical-align:top;
+}
+
+.city-name {
+  margin-top:15px;
+}
+
+.infection-blocks {
+  display: inline-block;
+  width:30px;
+  height:30px;
+  background-color: magenta;
+  margin:2px;
+  margin-top:10px;
+}

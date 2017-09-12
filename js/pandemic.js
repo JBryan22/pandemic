@@ -1,5 +1,5 @@
 import { City } from './../js/city.js';
-import { Questionnaire } from './../js/questionnaire.js';
+import { Questions } from './../js/questions.js';
 
 export class Pandemic {
   constructor () {
@@ -33,7 +33,8 @@ export class Pandemic {
 
   infectRandomCities() {
     let numberOfCities = this.cities.length;
-
+    // if (this.cities[0].addInfection()) {
+    //   this.outbreak(this.cities[0]);
     for (let i = 0; i < this.infectionAmount; i++) {
       if (this.cities[Math.floor(Math.random() * numberOfCities)].addInfection()) {
         this.outbreak(this.cities[i]);
@@ -52,17 +53,13 @@ export class Pandemic {
   }
 
   outbreak(city) {
-    if(city.outbroken) {
-      return;
-    }
+    console.log("Outbreak!!!!!");
     city.outbroken = true;
     city.connections.forEach((connectionCity) => {
       let currentCityIndex = this.cities.findIndex(i => i.name == connectionCity);
-
-      if (this.cities[currentCityIndex].addInfection()) {
-        this.outbreak(this.cities[currentCityIndex]);
-      }
+      this.cities[currentCityIndex].addInfection()
     });
+    console.log("End OutBReak!!");
   }
 
   buildQuarantinePoints() {
@@ -71,12 +68,12 @@ export class Pandemic {
 
 
   createQuestions() {
-    let question1 = new Question("The tags let and const are a feature of which version?", "ES6", "ES5", "ES4", "ES3");
-    let question2 = new Question("Before running your program, you must use which command?", "npm install", "pmn install", "mpn install", "mkn install");
-    let question3 = new Question("Javascript is a weakly-typed language similar to:", "Ruby", "C#", "Java", "C++");
-    let question4 = new Question("Javascript files should end in which suffix?", ".js", ".j", ".npm", ".gulp");
-    let question5 = new Question("When running a Javascript program in Node.js, your app file is located in which folder?", "js", "build/js", "build/js/vendor", "node_modules");
-    let question6 = new Question("Which job is tougher?", "Building a skyscrapper", "Being a high school teacher", "Programming in C#?", "Programming in Javascript");
+    let question1 = new Questions("The tags let and const are a feature of which version?", "ES6", "ES5", "ES4", "ES3");
+    let question2 = new Questions("Before running your program, you must use which command?", "npm install", "pmn install", "mpn install", "mkn install");
+    let question3 = new Questions("Javascript is a weakly-typed language similar to:", "Ruby", "C#", "Java", "C++");
+    let question4 = new Questions("Javascript files should end in which suffix?", ".js", ".j", ".npm", ".gulp");
+    let question5 = new Questions("When running a Javascript program in Node.js, your app file is located in which folder?", "js", "build/js", "build/js/vendor", "node_modules");
+    let question6 = new Questions("Which job is tougher?", "Building a skyscrapper", "Being a high school teacher", "Programming in C#?", "Programming in Javascript");
 
     this.questionnaire.push(question1, question2, question3, question4, question5, question6);
   }

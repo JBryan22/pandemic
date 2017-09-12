@@ -16,6 +16,7 @@ export class City {
     }
 
     this.infections++;
+
     if (this.infections > 4) {
       this.maxed = true;
     }
@@ -25,6 +26,7 @@ export class City {
     if (this.infections > 0) {
       this.infections--;
     }
+    this.maxed = false;
     this.outbroken = false;
   }
 

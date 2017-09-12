@@ -9,6 +9,7 @@ describe('City', function() {
     city.infections = 0;
     city.maxed = false;
     city.quarantine = false;
+    pandemic.createCities();
   });
 
   it('should add infection every time the function is called', function() {
@@ -91,6 +92,7 @@ describe('Pandemic', function() {
       pandemic.outbreak(pandemic.cities[0]);
     };
     expect(pandemic.cities[0].outbroken).toEqual(true);
+    expect(pandemic.getTotalInfections()).toEqual(10);
   });
 
   it('should cause multiple outbreaks when a city is maxed above 4 infections and it outbreaks to another maxed city', function() {

@@ -1,5 +1,5 @@
 import { City } from './../js/city.js';
-import { Pandemic } from './../js/questionnaire.js';
+import { Pandemic } from './../js/pandemic.js';
 
 export class Questions {
   constructor (question, answer, wrong1, wrong2, wrong3) {
@@ -49,7 +49,5 @@ export class Questions {
       return false;
     }
   }
-
-}
 
 }
